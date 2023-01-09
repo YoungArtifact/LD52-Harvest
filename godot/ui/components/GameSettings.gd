@@ -24,7 +24,6 @@ func _ready() -> void:
 		idx += 1
 	language_dropdown.select(select_index)		
 			
-
 func _on_master_volume_toggle_toggled(button_pressed: bool) -> void:
 	master_volume_slider.editable = button_pressed
 	music_volume_slider.editable = music_volume_toggle.button_pressed and button_pressed

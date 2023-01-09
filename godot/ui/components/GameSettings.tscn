@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://nbaodrlopo7y"]
+[gd_scene load_steps=4 format=3 uid="uid://lj7rvmyqtxe2"]
 
 [ext_resource type="PackedScene" uid="uid://cpo1u33eut0i4" path="res://ui/components/FloatRangeGameSettingsOption.tscn" id="1_0gpwr"]
 [ext_resource type="Script" path="res://ui/components/GameSettings.gd" id="1_eje8l"]

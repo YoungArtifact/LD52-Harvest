@@ -15,3 +15,5 @@ settings_volume_sound,Sound Volume,Sound Lautstärke
 settings_language,Game Language,Spielsprache
 game_paused,Game paused,Spiel pausiert
 resume_game,Resume game,Weiterspielen
+fruit_count,Fruits: ,Früchte: 
+point_count,Points: ,Punkte: 

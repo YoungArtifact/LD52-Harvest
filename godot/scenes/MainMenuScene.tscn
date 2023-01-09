@@ -1,20 +1,79 @@
-[gd_scene load_steps=8 format=3 uid="uid://dv2y18ye8j7o0"]
+[gd_scene load_steps=8 format=3 uid="uid://q8qwvmab1d4e"]
 
-[ext_resource type="Script" path="res://scenes/MainMenuScene.gd" id="1_1foie"]
-[ext_resource type="PackedScene" uid="uid://cik30de5gaaah" path="res://scenes/IngameScene.tscn" id="2_nl5i6"]
-[ext_resource type="PackedScene" uid="uid://g4qhvbvdm62w" path="res://scenes/GameSettingsScene.tscn" id="3_dgs4d"]
+[ext_resource type="PackedScene" uid="uid://kbwif2drj05k" path="res://scenes/GameSettingsScene.tscn" id="2_slq0x"]
+[ext_resource type="PackedScene" uid="uid://c2o7gsuwbgnib" path="res://scenes/Level.tscn" id="2_x74jr"]
 [ext_resource type="PackedScene" uid="uid://bkk87o2ooo6at" path="res://ui/overlays/FadeOverlay.tscn" id="3_kf1us"]
 [ext_resource type="PackedScene" uid="uid://b4blrdjthcxnn" path="res://ui/components/GameLogo.tscn" id="4_fnufg"]
 [ext_resource type="AudioStream" uid="uid://dlchk3c1baiy8" path="res://music/corgie-title.ogg" id="6_drnm6"]
+
+[sub_resource type="GDScript" id="GDScript_cjix3"]
+script/source = "extends Node2D
+
+@export var game_scene:PackedScene
+@export var settings_scene:PackedScene
+
+@onready var overlay := %FadeOverlay
+@onready var continue_button := %ContinueButton
+@onready var new_game_button := %NewGameButton
+@onready var settings_button := %SettingsButton
+@onready var exit_button := %ExitButton
+
+var next_scene = game_scene
+var new_game = true
+
+func _ready() -> void:
+	overlay.visible = true
+	new_game_button.disabled = game_scene == null
+	settings_button.disabled = settings_scene == null
+	continue_button.visible = SaveGame.has_save() and SaveGame.ENABLED
+	
+	# connect signals
+	new_game_button.pressed.connect(_on_play_button_pressed)
+	continue_button.pressed.connect(_on_continue_button_pressed)
+	settings_button.pressed.connect(_on_settings_button_pressed)
+	exit_button.pressed.connect(_on_exit_button_pressed)
+	overlay.on_complete_fade_out.connect(_on_fade_overlay_on_complete_fade_out)
+	
+	if continue_button.visible:
+		continue_button.grab_focus()
+	else:
+		new_game_button.grab_focus()
+
+func _on_settings_button_pressed() -> void:
+	new_game = false
+	next_scene = settings_scene
+	overlay.fade_out()
+	
+func _on_play_button_pressed() -> void:
+	next_scene = game_scene
+	overlay.fade_out()
+	
+func _on_continue_button_pressed() -> void:
+	new_game = false
+	next_scene = game_scene
+	overlay.fade_out()
+
+func _on_exit_button_pressed() -> void:
+	get_tree().quit()
+
+func _on_fade_overlay_on_complete_fade_out() -> void:
+	if new_game and SaveGame.has_save():
+		SaveGame.delete_save()
+	get_tree().change_scene_to_packed(next_scene)
+
+
+func _on_rich_text_label_meta_clicked(meta):
+	OS.shell_open(meta)
+"
 
 [sub_resource type="LabelSettings" id="LabelSettings_2ikbh"]
 font_size = 8
 font_color = Color(1, 1, 1, 0.486275)
 
 [node name="MainMenuScene" type="Node2D"]
-script = ExtResource("1_1foie")
-game_scene = ExtResource("2_nl5i6")
-settings_scene = ExtResource("3_dgs4d")
+script = SubResource("GDScript_cjix3")
+game_scene = ExtResource("2_x74jr")
+settings_scene = ExtResource("2_slq0x")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -22,52 +81,89 @@ settings_scene = ExtResource("3_dgs4d")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = 11.0
+offset_right = -9.0
+offset_bottom = 11.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer"]
-layout_mode = 2
+offset_left = 486.0
+offset_top = 163.0
+offset_right = 666.0
+offset_bottom = 485.0
 theme_override_constants/separation = 5
 
 [node name="GameLogo" parent="UI/CenterContainer/VBoxContainer" instance=ExtResource("4_fnufg")]
-layout_mode = 2
+offset_right = 180.0
+offset_bottom = 148.0
 
 [node name="ContinueButton" type="Button" parent="UI/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 2
+offset_top = 153.0
+offset_right = 180.0
+offset_bottom = 184.0
 text = "continue"
 
 [node name="NewGameButton" type="Button" parent="UI/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 0)
-layout_mode = 2
+offset_top = 189.0
+offset_right = 180.0
+offset_bottom = 220.0
 size_flags_horizontal = 4
 text = "new_game"
 
 [node name="SettingsButton" type="Button" parent="UI/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 0)
-layout_mode = 2
+offset_top = 225.0
+offset_right = 180.0
+offset_bottom = 256.0
 size_flags_horizontal = 4
 text = "settings"
 
 [node name="ExitButton" type="Button" parent="UI/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 0)
-layout_mode = 2
+offset_top = 261.0
+offset_right = 180.0
+offset_bottom = 292.0
 size_flags_horizontal = 4
 text = "leave_game"
 
 [node name="Credits" type="MarginContainer" parent="UI/CenterContainer/VBoxContainer"]
-layout_mode = 2
+offset_left = 76.0
+offset_top = 297.0
+offset_right = 104.0
+offset_bottom = 322.0
 size_flags_horizontal = 4
 theme_override_constants/margin_top = 10
 
 [node name="Label" type="Label" parent="UI/CenterContainer/VBoxContainer/Credits"]
-layout_mode = 2
-text = "credits"
+offset_top = 10.0
+offset_right = 28.0
+offset_bottom = 25.0
+size_flags_horizontal = 4
+text = "Credits"
 label_settings = SubResource("LabelSettings_2ikbh")
 horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/CenterContainer/VBoxContainer/Credits/Label"]
+offset_left = -94.0
+offset_top = 15.0
+offset_right = 116.0
+offset_bottom = 137.0
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "Build upon:
+		[url=https://github.com/bitbrain/godot-gamejam]Godot Gamejam Template[/url] by [url=https://www.youtube.com/bitbraindev]bitbrain[/url]
+
+Ingame assets:
+		[url=https://www.kenney.nl/assets/pixel-platformer]Pixel Platformer[/url] by [url=https://www.kenney.nl/assets]Kenny Assets[/url]
+		[url=https://www.kenney.nl/assets/pixel-platformer-farm-expansion]Farm Expansion[/url] by [url=https://www.kenney.nl/assets]Kenny Assets[/url]
+"
 
 [node name="FadeOverlay" parent="UI" instance=ExtResource("3_kf1us")]
 unique_name_in_owner = true
@@ -77,3 +173,5 @@ visible = false
 stream = ExtResource("6_drnm6")
 autoplay = true
 bus = &"Music"
+
+[connection signal="meta_clicked" from="UI/CenterContainer/VBoxContainer/Credits/Label/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]

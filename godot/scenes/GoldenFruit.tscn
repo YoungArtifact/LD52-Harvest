@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkb6dfe4x77bo"]
+
+[ext_resource type="Texture2D" uid="uid://fiw0d5djjydb" path="res://assets/golden_fruit.png" id="1_w7llk"]
+
+[node name="Fruit" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_w7llk")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(3, -6.5, 6, -4.5, 6, -2, 7.2, 4, 5.5, 4, 3.5, 7, -1, 7, -1, 6, -4, 6, -4, 4.6, -6, 3.6, -6, -2.4, -2, -6.4, -2, -8, 3, -8)

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://pxpt36vbkkwg"]
+
+[ext_resource type="Texture2D" uid="uid://dfxqlrqmi1vxl" path="res://assets/kenney_pixelplatformer/Tiles/tile_0026.png" id="1_fv5rs"]
+
+[node name="Crate" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fv5rs")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(9, -9, 9, 9, -9, 9, -9, -9, 8.4, -9)
