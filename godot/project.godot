@@ -47,7 +47,6 @@ _global_script_class_icons={
 config/name="HarvestNet"
 run/main_scene="res://scenes/boot/godot/GodotBootsplashScene.tscn"
 config/features=PackedStringArray("4.0")
-config/icon="res://icon.svg"
 
 [autoload]
 

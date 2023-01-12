@@ -3,8 +3,8 @@ extends Node2D
 @onready var fade_overlay = %FadeOverlay
 @onready var pause_overlay = %PauseOverlay
 @onready var points_count = %PointsCount
+@onready var menu_background = %MenuBackground
 
-var points : int = 0
 var fruit_collected : bool = false
 var golden_collected : bool = false
 var net_empty : Texture = preload("res://assets/net.png")
@@ -20,14 +20,16 @@ func _ready() -> void:
 	pause_overlay.game_exited.connect(_save_game)
 
 func _process(delta):
-	points_count.text = str(points)
+	points_count.text = str(get_node("Player").points)
 
 func _input(event) -> void:
 	if event.is_action_pressed("pause") and not pause_overlay.visible:
 		get_viewport().set_input_as_handled()
 		get_tree().paused = true
 		pause_overlay.grab_focus()
+		menu_background.visible = true
 		pause_overlay.visible = true
+		
 
 func _save_game() -> void:
 	SaveGame.save_game(get_tree())
@@ -48,13 +50,15 @@ func _on_area_entered_net(body):
 
 func _on_body_entered_box(body):
 	get_node("Player/Net/Net").texture = net_empty
-	if golden_collected:
-		fruit_collected = false
-		golden_collected = false
-		points += 50
-	else:
-		fruit_collected = false
-		points += 10
+	if fruit_collected:
+		if golden_collected:
+			fruit_collected = false
+			golden_collected = false
+			get_node("Player").points += 50
+		else:
+			fruit_collected = false
+			get_node("Player").points += 10
+	_save_game()
 
 func _on_fruit_timer_timeout():
 	get_node("Fruit").monitorable = true
@@ -76,6 +80,10 @@ func _on_fruit_timer_4_timeout():
 	get_node("Fruit4").visible = true
 
 
-func _on_golden_fruit_timer_timeout():
+func _on_golden_timer_timeout():
 	get_node("GoldenFruit").monitorable = true
 	get_node("GoldenFruit").visible = true
+
+
+func _on_pause_overlay_game_resumed():
+	menu_background.visible = false

@@ -1,6 +1,7 @@
 extends CenterContainer
 
 signal game_exited
+signal game_resumed
 
 @onready var resume_button := %ResumeButton
 @onready var settings_button := %SettingsButton
@@ -8,6 +9,8 @@ signal game_exited
 @onready var settings_container := %SettingsContainer
 @onready var menu_container := %MenuContainer
 @onready var back_button := %BackButton
+
+@onready var menu_background = %MenuBackground
 
 func _ready() -> void:
 	resume_button.pressed.connect(_resume)
@@ -20,6 +23,7 @@ func grab_focus() -> void:
 	
 func _resume() -> void:
 	get_tree().paused = false
+	game_resumed.emit()
 	visible = false
 	
 	

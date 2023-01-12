@@ -4,6 +4,8 @@ class_name PlatformerController2D
 
 @onready var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+var points : int
+
 @export var walk_force = 600
 @export var walk_max_speed = 100
 @export var stop_force = 1300

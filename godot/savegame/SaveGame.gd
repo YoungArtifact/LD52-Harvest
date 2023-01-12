@@ -52,7 +52,10 @@ static func save_game(tree:SceneTree):
 			save_data["pos_y"] = node.position.y
 			if node.position is Vector3:
 				save_data["pos_z"] = node.position.z
-				
+		
+		if "points" in node:
+			save_data["points"] = node.points
+		
 		if node is Node2D:
 			save_data["rotation"] = node.rotation
 		elif node is Node3D:
@@ -133,6 +136,9 @@ static func load_game(tree:SceneTree) -> void:
 				node.position = Vector2(save_data["pos_x"], save_data["pos_y"])
 			elif node.scale is Vector3:
 				node.position = Vector3(save_data["pos_x"], save_data["pos_y"], save_data["pos_z"])
+			
+		if "points" in node:
+			node.points = save_data["points"]
 			
 		if node is Node2D:
 			node.rotation = save_data["rotation"]
