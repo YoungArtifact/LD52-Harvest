@@ -29,7 +29,6 @@ func _input(event) -> void:
 		pause_overlay.grab_focus()
 		menu_background.visible = true
 		pause_overlay.visible = true
-		
 
 func _save_game() -> void:
 	SaveGame.save_game(get_tree())
@@ -63,27 +62,22 @@ func _on_body_entered_box(body):
 func _on_fruit_timer_timeout():
 	get_node("Fruit").monitorable = true
 	get_node("Fruit").visible = true
-	
 
 func _on_fruit_timer_2_timeout():
 	get_node("Fruit2").monitorable = true
 	get_node("Fruit2").visible = true
 
-
 func _on_fruit_timer_3_timeout():
 	get_node("Fruit3").monitorable = true
 	get_node("Fruit3").visible = true
-
 
 func _on_fruit_timer_4_timeout():
 	get_node("Fruit4").monitorable = true
 	get_node("Fruit4").visible = true
 
-
 func _on_golden_timer_timeout():
 	get_node("GoldenFruit").monitorable = true
 	get_node("GoldenFruit").visible = true
-
 
 func _on_pause_overlay_game_resumed():
 	menu_background.visible = false

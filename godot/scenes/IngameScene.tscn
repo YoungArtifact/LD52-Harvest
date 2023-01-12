@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://c8obbtrupx23p"]
+[gd_scene load_steps=18 format=3 uid="uid://c8obbtrupx23p"]
 
 [ext_resource type="Script" path="res://scripts/IngameScene.gd" id="1_3vf3s"]
 [ext_resource type="PackedScene" uid="uid://bkk87o2ooo6at" path="res://ui/overlays/FadeOverlay.tscn" id="2_0nr6g"]
 [ext_resource type="PackedScene" uid="uid://jyv4g54adkmo" path="res://ui/overlays/PauseOverlay.tscn" id="3_ga52i"]
 [ext_resource type="TileSet" uid="uid://cjaesegvgwmk1" path="res://assets/Tilesets/sky.tres" id="4_fpy2k"]
+[ext_resource type="Texture2D" uid="uid://7yh5ekdj87v" path="res://icon.svg" id="4_jltyu"]
 [ext_resource type="TileSet" uid="uid://cinpmwvh67ued" path="res://assets/Tilesets/BlackgroundIsland.tres" id="5_2gtl1"]
 [ext_resource type="TileSet" uid="uid://bwtrm5rqk4ud5" path="res://assets/Tilesets/floor.tres" id="6_kq2pq"]
 [ext_resource type="PackedScene" uid="uid://bfhsmup3gdnhu" path="res://scenes/Fruit.tscn" id="7_wbmr0"]
@@ -12,6 +13,9 @@
 [ext_resource type="Script" path="res://scripts/Net.gd" id="10_hr0ey"]
 [ext_resource type="PackedScene" uid="uid://pxpt36vbkkwg" path="res://scenes/Crate.tscn" id="11_twgpp"]
 [ext_resource type="AudioStream" uid="uid://dlchk3c1baiy8" path="res://music/corgie-title.ogg" id="12_0cg8k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wi4jg"]
+radius = 79.19
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fsl6a"]
 load_path = "res://.godot/imported/Net.png-2f0da26956f1fbc36ca44bcf8b4608ea.ctex"
@@ -48,6 +52,13 @@ offset_left = -84.0
 offset_top = 0.0
 offset_right = 89.0
 offset_bottom = 0.0
+
+[node name="TouchControls" type="Node2D" parent="UI"]
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="UI/TouchControls"]
+position = Vector2(35, 482)
+texture_normal = ExtResource("4_jltyu")
+shape = SubResource("CircleShape2D_wi4jg")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
