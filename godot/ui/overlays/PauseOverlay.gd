@@ -10,8 +10,6 @@ signal game_resumed
 @onready var menu_container := %MenuContainer
 @onready var back_button := %BackButton
 
-@onready var menu_background = %MenuBackground
-
 func _ready() -> void:
 	resume_button.pressed.connect(_resume)
 	settings_button.pressed.connect(_settings)

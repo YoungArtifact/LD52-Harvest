@@ -5,6 +5,8 @@ signal on_value_change(key, value)
 const SECTION = "user"
 const SETTINGS_FILE = "user://settings.cfg"
 
+var TOUCHINPUT_ENABLED = false
+
 const MASTERVOLUME_ENABLED = "mastervolume_enabled"
 const MUSICVOLUME_ENABLED = "musicvolume_enabled"
 const SOUNDVOLUME_ENABLED = "soundvolume_enabled"

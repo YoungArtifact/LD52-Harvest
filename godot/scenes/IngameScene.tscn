@@ -1,13 +1,17 @@
-[gd_scene load_steps=18 format=3 uid="uid://c8obbtrupx23p"]
+[gd_scene load_steps=23 format=3 uid="uid://c8obbtrupx23p"]
 
 [ext_resource type="Script" path="res://scripts/IngameScene.gd" id="1_3vf3s"]
 [ext_resource type="PackedScene" uid="uid://bkk87o2ooo6at" path="res://ui/overlays/FadeOverlay.tscn" id="2_0nr6g"]
 [ext_resource type="PackedScene" uid="uid://jyv4g54adkmo" path="res://ui/overlays/PauseOverlay.tscn" id="3_ga52i"]
+[ext_resource type="Texture2D" uid="uid://cabnyn1uhk2ga" path="res://assets/arrow_left.png" id="4_abqwj"]
 [ext_resource type="TileSet" uid="uid://cjaesegvgwmk1" path="res://assets/Tilesets/sky.tres" id="4_fpy2k"]
-[ext_resource type="Texture2D" uid="uid://7yh5ekdj87v" path="res://icon.svg" id="4_jltyu"]
 [ext_resource type="TileSet" uid="uid://cinpmwvh67ued" path="res://assets/Tilesets/BlackgroundIsland.tres" id="5_2gtl1"]
+[ext_resource type="Texture2D" uid="uid://c4v4q4ie08yl8" path="res://assets/arrow_right.png" id="5_abm2k"]
 [ext_resource type="TileSet" uid="uid://bwtrm5rqk4ud5" path="res://assets/Tilesets/floor.tres" id="6_kq2pq"]
+[ext_resource type="Texture2D" uid="uid://d07egk70kcsh8" path="res://assets/arrow_up.png" id="6_qfygc"]
+[ext_resource type="Texture2D" uid="uid://c4mrsyf5vhqa8" path="res://assets/arrow_down.png" id="7_lxvpc"]
 [ext_resource type="PackedScene" uid="uid://bfhsmup3gdnhu" path="res://scenes/Fruit.tscn" id="7_wbmr0"]
+[ext_resource type="Texture2D" uid="uid://bstf2yjft1r6f" path="res://assets/menu.png" id="8_rpgma"]
 [ext_resource type="PackedScene" uid="uid://5iorutogh4bo" path="res://scenes/GoldenFruit.tscn" id="8_tcpx3"]
 [ext_resource type="PackedScene" uid="uid://cuwjl3w7t4f32" path="res://scenes/Player.tscn" id="9_fwjfd"]
 [ext_resource type="Script" path="res://scripts/Net.gd" id="10_hr0ey"]
@@ -15,7 +19,10 @@
 [ext_resource type="AudioStream" uid="uid://dlchk3c1baiy8" path="res://music/corgie-title.ogg" id="12_0cg8k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wi4jg"]
-radius = 79.19
+radius = 15.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1f66k"]
+size = Vector2(30, 30)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fsl6a"]
 load_path = "res://.godot/imported/Net.png-2f0da26956f1fbc36ca44bcf8b4608ea.ctex"
@@ -53,12 +60,46 @@ offset_top = 0.0
 offset_right = 89.0
 offset_bottom = 0.0
 
-[node name="TouchControls" type="Node2D" parent="UI"]
+[node name="TouchControls" type="Node" parent="UI"]
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="UI/TouchControls"]
-position = Vector2(35, 482)
-texture_normal = ExtResource("4_jltyu")
+[node name="LeftButton" type="TouchScreenButton" parent="UI/TouchControls"]
+position = Vector2(48, 465)
+scale = Vector2(4.91667, 4.91667)
+texture_normal = ExtResource("4_abqwj")
 shape = SubResource("CircleShape2D_wi4jg")
+action = "move_left"
+visibility_mode = 1
+
+[node name="RightButton" type="TouchScreenButton" parent="UI/TouchControls"]
+position = Vector2(218, 465)
+scale = Vector2(5.08333, 5.08333)
+texture_normal = ExtResource("5_abm2k")
+shape = SubResource("CircleShape2D_wi4jg")
+action = "move_right"
+visibility_mode = 1
+
+[node name="UpButton" type="TouchScreenButton" parent="UI/TouchControls"]
+position = Vector2(944, 292)
+scale = Vector2(5.20833, 5.20833)
+texture_normal = ExtResource("6_qfygc")
+shape = SubResource("CircleShape2D_wi4jg")
+action = "move_up"
+visibility_mode = 1
+
+[node name="DownButton" type="TouchScreenButton" parent="UI/TouchControls"]
+position = Vector2(944, 465)
+scale = Vector2(5.19476, 5.19476)
+texture_normal = ExtResource("7_lxvpc")
+shape = SubResource("CircleShape2D_wi4jg")
+action = "move_down"
+visibility_mode = 1
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="UI"]
+position = Vector2(1013, 16)
+scale = Vector2(4.99869, 4.99869)
+texture_normal = ExtResource("8_rpgma")
+shape = SubResource("RectangleShape2D_1f66k")
+action = "pause"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -136,7 +177,7 @@ one_shot = true
 autostart = true
 
 [node name="Player" parent="." groups=["Persist"] instance=ExtResource("9_fwjfd")]
-position = Vector2(0, 6)
+position = Vector2(0, 4)
 walk_max_speed = 150
 jump_force = 600
 
@@ -182,11 +223,11 @@ position = Vector2(-196, 6)
 scale = Vector2(1.5, 1.5)
 
 [node name="Area2D" type="Area2D" parent="Crate"]
-position = Vector2(130.667, 0)
+position = Vector2(-1.52588e-05, 0)
 scale = Vector2(0.666667, 0.666667)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Crate/Area2D"]
-position = Vector2(-196, -2)
+position = Vector2(3.05176e-05, -4)
 shape = SubResource("RectangleShape2D_hlaoe")
 
 [node name="Crate2" parent="." instance=ExtResource("11_twgpp")]
@@ -194,11 +235,11 @@ position = Vector2(196, 6)
 scale = Vector2(1.5, 1.5)
 
 [node name="Area2D" type="Area2D" parent="Crate2"]
-position = Vector2(130.667, 0)
+position = Vector2(-3.05176e-05, 0)
 scale = Vector2(0.666667, 0.666667)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Crate2/Area2D"]
-position = Vector2(-196, -2)
+position = Vector2(4.57764e-05, -4)
 shape = SubResource("RectangleShape2D_hlaoe")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]

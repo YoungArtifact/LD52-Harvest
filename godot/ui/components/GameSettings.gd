@@ -7,6 +7,7 @@ extends VBoxContainer
 @onready var sound_volume_toggle := %SoundEnabledToggle
 @onready var sound_volume_slider := %SoundVolumeSlider
 @onready var language_dropdown := %LanguageDropdown
+@onready var input_toggle := %GameInputToggle
 
 ## maps the index of a locale to the locale itself
 var locales:PackedStringArray = []
@@ -22,8 +23,8 @@ func _ready() -> void:
 		if current_locale == locale:
 			select_index = idx
 		idx += 1
-	language_dropdown.select(select_index)		
-			
+	language_dropdown.select(select_index)
+
 func _on_master_volume_toggle_toggled(button_pressed: bool) -> void:
 	master_volume_slider.editable = button_pressed
 	music_volume_slider.editable = music_volume_toggle.button_pressed and button_pressed
@@ -43,3 +44,8 @@ func _on_sound_enabled_toggle_toggled(button_pressed: bool) -> void:
 
 func _on_language_dropdown_item_selected(index: int) -> void:
 	UserSettings.set_value("game_locale", locales[index])
+
+
+func _on_game_input_toggle_toggled(button_pressed: bool) -> void:
+	UserSettings.TOUCHINPUT_ENABLED = button_pressed
+	

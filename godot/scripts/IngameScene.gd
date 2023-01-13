@@ -21,6 +21,16 @@ func _ready() -> void:
 
 func _process(delta):
 	points_count.text = str(get_node("Player").points)
+	if UserSettings.TOUCHINPUT_ENABLED:
+		get_node("UI/TouchControls/DownButton").visible = true
+		get_node("UI/TouchControls/UpButton").visible = true
+		get_node("UI/TouchControls/RightButton").visible = true
+		get_node("UI/TouchControls/LeftButton").visible = true
+	else:
+		get_node("UI/TouchControls/DownButton").visible = false
+		get_node("UI/TouchControls/UpButton").visible = false
+		get_node("UI/TouchControls/RightButton").visible = false
+		get_node("UI/TouchControls/LeftButton").visible = false
 
 func _input(event) -> void:
 	if event.is_action_pressed("pause") and not pause_overlay.visible:
@@ -81,3 +91,4 @@ func _on_golden_timer_timeout():
 
 func _on_pause_overlay_game_resumed():
 	menu_background.visible = false
+
