@@ -2,6 +2,7 @@ Big shoutouts to [Aendawyn](https://ldj.am/$315825) without whomst I couldn't ha
 
 Harvest the fruits from the tree. One at a time! Then bring them to the crate, simple as that.
 
+![icon](https://user-images.githubusercontent.com/45591166/212546358-6adbdfe9-3457-416e-a0eb-a33628e9057a.svg)
 
 
 Known bugs:
