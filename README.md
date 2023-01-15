@@ -2,7 +2,8 @@ Big shoutouts to [Aendawyn](https://ldj.am/$315825) without whomst I couldn't ha
 
 Harvest the fruits from the tree. One at a time! Then bring them to the crate, simple as that.
 
-![Screenshot 2023-01-09 213022.png](///raw/9d4/44/z/559c0.png)
+[Screenshot 2023-01-09 213022](https://user-images.githubusercontent.com/45591166/212546272-612c48f0-87e2-49e5-b6fb-fee5f527e0b8.png)
+
 
 Known bugs:
 - ~~Golden Apples won't get collect. The rest of their code works.~~ (fixed!)
