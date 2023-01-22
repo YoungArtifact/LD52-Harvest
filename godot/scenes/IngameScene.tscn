@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c8obbtrupx23p"]
+[gd_scene load_steps=26 format=3 uid="uid://c8obbtrupx23p"]
 
 [ext_resource type="Script" path="res://scripts/IngameScene.gd" id="1_3vf3s"]
 [ext_resource type="PackedScene" uid="uid://bkk87o2ooo6at" path="res://ui/overlays/FadeOverlay.tscn" id="2_0nr6g"]
@@ -18,11 +18,20 @@
 [ext_resource type="PackedScene" uid="uid://pxpt36vbkkwg" path="res://scenes/Crate.tscn" id="11_twgpp"]
 [ext_resource type="AudioStream" uid="uid://dlchk3c1baiy8" path="res://music/corgie-title.ogg" id="12_0cg8k"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wi4jg"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_il0ev"]
 radius = 15.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1f66k"]
-size = Vector2(30, 30)
+[sub_resource type="CircleShape2D" id="CircleShape2D_2og3f"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yxsl1"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ckcim"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ceiht"]
+radius = 15.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fsl6a"]
 load_path = "res://.godot/imported/Net.png-2f0da26956f1fbc36ca44bcf8b4608ea.ctex"
@@ -41,10 +50,20 @@ script = ExtResource("1_3vf3s")
 [node name="MenuBackground" type="ColorRect" parent="UI"]
 unique_name_in_owner = true
 visible = false
-offset_left = 349.0
-offset_top = 212.0
-offset_right = 829.0
-offset_bottom = 458.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -301.0
+offset_top = -110.0
+offset_right = 63.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.66265, 1.19324)
+size_flags_horizontal = 4
+size_flags_vertical = 4
 color = Color(0.152941, 0.152941, 0.239216, 1)
 
 [node name="FadeOverlay" parent="UI" instance=ExtResource("2_0nr6g")]
@@ -60,45 +79,121 @@ offset_top = 0.0
 offset_right = 89.0
 offset_bottom = 0.0
 
-[node name="TouchControls" type="Node" parent="UI"]
+[node name="Points" type="Label" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -194.0
+offset_right = -41.9999
+offset_bottom = 43.0
+grow_horizontal = 2
+scale = Vector2(1.65138, 1.65138)
+text = "point_count"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="LeftButton" type="TouchScreenButton" parent="UI/TouchControls"]
-position = Vector2(48, 465)
-scale = Vector2(4.91667, 4.91667)
+[node name="PointsCount" type="Label" parent="UI/Points"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 152.0
+offset_right = 228.0
+offset_bottom = 43.0
+vertical_alignment = 1
+
+[node name="LeftButtonAnchor" type="Control" parent="UI"]
+layout_mode = 3
+anchor_left = 0.045
+anchor_top = 0.699
+anchor_right = 0.191
+anchor_bottom = 0.958
+offset_left = 122.16
+offset_top = 166.048
+offset_right = -46.032
+offset_bottom = -1.78406
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftButton" type="TouchScreenButton" parent="UI/LeftButtonAnchor"]
+position = Vector2(-122, -168)
+scale = Vector2(7, 7)
 texture_normal = ExtResource("4_abqwj")
-shape = SubResource("CircleShape2D_wi4jg")
+shape = SubResource("CircleShape2D_il0ev")
 action = "move_left"
-visibility_mode = 1
 
-[node name="RightButton" type="TouchScreenButton" parent="UI/TouchControls"]
-position = Vector2(218, 465)
-scale = Vector2(5.08333, 5.08333)
+[node name="RightButtonAnchor" type="Control" parent="UI"]
+layout_mode = 3
+anchor_left = 0.239
+anchor_top = 0.699
+anchor_right = 0.385
+anchor_bottom = 0.958
+offset_left = 52.672
+offset_top = 166.048
+offset_right = -115.52
+offset_bottom = -1.78406
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RightButton" type="TouchScreenButton" parent="UI/RightButtonAnchor"]
+position = Vector2(-53, -166)
+scale = Vector2(7, 7)
 texture_normal = ExtResource("5_abm2k")
-shape = SubResource("CircleShape2D_wi4jg")
+shape = SubResource("CircleShape2D_2og3f")
 action = "move_right"
-visibility_mode = 1
 
-[node name="UpButton" type="TouchScreenButton" parent="UI/TouchControls"]
-position = Vector2(944, 292)
-scale = Vector2(5.20833, 5.20833)
+[node name="UpButtonAnchor" type="Control" parent="UI"]
+layout_mode = 3
+anchor_left = 0.817
+anchor_top = 0.33
+anchor_right = 0.963
+anchor_bottom = 0.59
+offset_left = 144.816
+offset_top = 276.16
+offset_right = -23.3761
+offset_bottom = 107.68
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UpButton" type="TouchScreenButton" parent="UI/UpButtonAnchor"]
+position = Vector2(-145, -276)
+scale = Vector2(7, 7)
 texture_normal = ExtResource("6_qfygc")
-shape = SubResource("CircleShape2D_wi4jg")
+shape = SubResource("CircleShape2D_yxsl1")
 action = "move_up"
-visibility_mode = 1
 
-[node name="DownButton" type="TouchScreenButton" parent="UI/TouchControls"]
-position = Vector2(944, 465)
-scale = Vector2(5.19476, 5.19476)
+[node name="DownButtonAnchor" type="Control" parent="UI"]
+layout_mode = 3
+anchor_left = 0.817
+anchor_top = 0.67
+anchor_right = 0.963
+anchor_bottom = 0.929
+offset_left = 144.816
+offset_top = 182.84
+offset_right = -23.3761
+offset_bottom = 15.008
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DownButton" type="TouchScreenButton" parent="UI/DownButtonAnchor"]
+position = Vector2(-145, -183)
+scale = Vector2(7, 7)
 texture_normal = ExtResource("7_lxvpc")
-shape = SubResource("CircleShape2D_wi4jg")
+shape = SubResource("CircleShape2D_ckcim")
 action = "move_down"
-visibility_mode = 1
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="UI"]
-position = Vector2(1013, 16)
-scale = Vector2(4.99869, 4.99869)
+[node name="MenuButtonAnchor6" type="Control" parent="UI"]
+layout_mode = 3
+anchor_right = 0.089
+anchor_bottom = 0.158
+offset_right = -102.528
+offset_bottom = -102.384
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuButton" type="TouchScreenButton" parent="UI/MenuButtonAnchor6"]
+position = Vector2(-1.90735e-06, -3.8147e-06)
+scale = Vector2(4, 4)
 texture_normal = ExtResource("8_rpgma")
-shape = SubResource("RectangleShape2D_1f66k")
+shape = SubResource("CircleShape2D_ceiht")
 action = "pause"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -184,24 +279,6 @@ jump_force = 600
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
 zoom = Vector2(2, 2)
-
-[node name="Points" type="Label" parent="Player"]
-offset_left = -44.0
-offset_top = -161.0
-offset_right = 48.0
-offset_bottom = -135.0
-text = "point_count"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PointsCount" type="Label" parent="Player/Points" groups=["Persist"]]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 46.0
-offset_right = 130.0
-offset_bottom = 26.0
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Net" type="Node2D" parent="Player"]
 script = ExtResource("10_hr0ey")

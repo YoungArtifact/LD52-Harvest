@@ -22,26 +22,29 @@ func _ready() -> void:
 func _process(delta):
 	points_count.text = str(get_node("Player").points)
 	if UserSettings.TOUCHINPUT_ENABLED:
-		get_node("UI/TouchControls/DownButton").visible = true
-		get_node("UI/TouchControls/UpButton").visible = true
-		get_node("UI/TouchControls/RightButton").visible = true
-		get_node("UI/TouchControls/LeftButton").visible = true
+		get_node("UI/DownButtonAnchor/DownButton").visible = true
+		get_node("UI/UpButtonAnchor/UpButton").visible = true
+		get_node("UI/RightButtonAnchor/RightButton").visible = true
+		get_node("UI/LeftButtonAnchor/LeftButton").visible = true
 	else:
-		get_node("UI/TouchControls/DownButton").visible = false
-		get_node("UI/TouchControls/UpButton").visible = false
-		get_node("UI/TouchControls/RightButton").visible = false
-		get_node("UI/TouchControls/LeftButton").visible = false
+		get_node("UI/DownButtonAnchor/DownButton").visible = false
+		get_node("UI/UpButtonAnchor/UpButton").visible = false
+		get_node("UI/RightButtonAnchor/RightButton").visible = false
+		get_node("UI/LeftButtonAnchor/LeftButton").visible = false
 
 func _input(event) -> void:
 	if event.is_action_pressed("pause") and not pause_overlay.visible:
-		get_viewport().set_input_as_handled()
-		get_tree().paused = true
-		pause_overlay.grab_focus()
-		menu_background.visible = true
-		pause_overlay.visible = true
+		pause()
 
 func _save_game() -> void:
 	SaveGame.save_game(get_tree())
+
+func pause():
+	get_viewport().set_input_as_handled()
+	get_tree().paused = true
+	pause_overlay.grab_focus()
+	menu_background.visible = true
+	pause_overlay.visible = true
 
 func _on_area_entered_net(body):
 	if not fruit_collected:
