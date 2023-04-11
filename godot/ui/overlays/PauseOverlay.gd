@@ -16,8 +16,8 @@ func _ready() -> void:
 	exit_button.pressed.connect(_exit)
 	back_button.pressed.connect(_pause_menu)
 	
-func grab_focus() -> void:
-	resume_button.grab_focus()
+#func grab_focus() -> void:
+#	resume_button.grab_focus()
 	
 func _resume() -> void:
 	get_tree().paused = false

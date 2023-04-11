@@ -277,7 +277,6 @@ walk_max_speed = 150
 jump_force = 600
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-current = true
 zoom = Vector2(2, 2)
 
 [node name="Net" type="Node2D" parent="Player"]
